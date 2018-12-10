@@ -5,10 +5,10 @@ function createCell(row, col, size) {
     let was_visited = false;
     let was_backtracked = false;
     const walls = {
-        N: col === 0,
+        N: row === 0,
         E: true,
         S: true,
-        W: row === 0
+        W: col === 0
     };
 
     return {
