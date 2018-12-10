@@ -8,7 +8,7 @@ function createCell(row, col, size) {
         N: row === 0,
         E: true,
         S: true,
-        W: col === 0
+        W: col === 0 && row !== 0 // for "entrance"
     };
 
     return {
