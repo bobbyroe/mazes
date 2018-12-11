@@ -27,9 +27,6 @@ function createMaze(width, height, canvas, ctx) {
     const y = middle.y - height * 0.5;
     const cells = _createCells(cell_size, width);
 
-    // set wall thinkness
-    ctx.lineWidth = 6;
-    ctx.strokeStyle = "#00CCFF";
     function draw () {
         ctx.clearRect(x, y, width, height);
         maze.cells.forEach((row) => {

@@ -19,5 +19,3 @@ ctx.moveTo(
 
 maze.initialize();
 solver.start();
-
-// https://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursive_backtracker

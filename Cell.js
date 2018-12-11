@@ -11,14 +11,19 @@ function createCell(row, col, size, grid_size) {
         W: col === 0 && row !== 0 // for "entrance"
     };
 
+    // set wall thinkness
+    ctx.lineWidth = 4;
+    ctx.strokeStyle = "#00CCFF";
+    
     function draw () {
         let cell_x = col * size;
         let cell_y = row * size;
+        ctx.beginPath();
         ctx.rect(
-            maze.x + cell_x + 2,
-            maze.y + cell_y + 2,
-            size - 4,
-            size - 4
+            maze.x + cell_x,
+            maze.y + cell_y,
+            size,
+            size
         );
         ctx.fill();
 
