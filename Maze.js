@@ -8,7 +8,7 @@ function _createCells(cell_size, width) {
     for (let row = 0; row < grid_size; row += 1) {
         let cur_row = [];
         for (let col = 0; col < grid_size; col += 1) {
-            cur_row.push(createCell(row, col, cell_size));
+            cur_row.push(createCell(row, col, cell_size, grid_size));
         }
         cells.push(cur_row);
     }
@@ -17,15 +17,21 @@ function _createCells(cell_size, width) {
 
 // Maze constructor
 function createMaze(width, height, canvas, ctx) {
+
+    const cell_size = 40;
     const middle = {
         x: canvas.width * 0.5,
         y: canvas.height * 0.5
     }
     const x = middle.x - width * 0.5;
     const y = middle.y - height * 0.5;
-    const cells = _createCells(80, width);
+    const cells = _createCells(cell_size, width);
 
+    // set wall thinkness
+    ctx.lineWidth = 6;
+    ctx.strokeStyle = "#00CCFF";
     function draw () {
+        ctx.clearRect(x, y, width, height);
         maze.cells.forEach((row) => {
 
             row.forEach((cell) => {
@@ -35,22 +41,23 @@ function createMaze(width, height, canvas, ctx) {
                 // fill
                 ctx.fillStyle = "#000000";
                 if (cell.was_visited === true) {
-                    ctx.fillStyle = "#606060";    
+                    ctx.fillStyle = "#202020";    
                 } 
                 if (cell.was_backtracked === true) {
-                    ctx.fillStyle = "#808080";
+                    ctx.fillStyle = "#202040";
                 }
 
                 ctx.rect(
-                    maze.x + cell_x + 4,
-                    maze.y + cell_y + 4,
-                    cell.size - 8,
-                    cell.size - 8
+                    maze.x + cell_x + 2,
+                    maze.y + cell_y + 2,
+                    cell.size - 4,
+                    cell.size - 4
                 );
                 ctx.fill();
 
                 // stroke
                 if (cell.walls.N === true) {
+                    // ctx.strokeStyle = "#FF0000";
                     ctx.beginPath();
                     ctx.moveTo(
                         maze.x + cell_x,
@@ -63,6 +70,7 @@ function createMaze(width, height, canvas, ctx) {
                     ctx.stroke();
                 }
                 if (cell.walls.W === true) {
+                    // ctx.strokeStyle = "#FFFF00";
                     ctx.beginPath();
                     ctx.moveTo(
                         maze.x + cell_x,
@@ -75,6 +83,7 @@ function createMaze(width, height, canvas, ctx) {
                     ctx.stroke();
                 }
                 if (cell.walls.E === true) {
+                    // ctx.strokeStyle = "#00FF00";
                     ctx.beginPath();
                     ctx.moveTo(
                         maze.x + cell_x + cell.size,
@@ -87,6 +96,7 @@ function createMaze(width, height, canvas, ctx) {
                     ctx.stroke();
                 }
                 if (cell.walls.S === true) {
+                    // ctx.strokeStyle = "#0000FF";
                     ctx.beginPath();
                     ctx.moveTo(
                         maze.x + cell_x + cell.size,
@@ -116,7 +126,7 @@ function createMaze(width, height, canvas, ctx) {
         let randex = -1;
         const c = cell.col;
         const r = cell.row;
-        const c_max = cells.length - 1;
+        const r_max = cells.length - 1;
         const neighbs = [];
 
         function checkCell (cur_cell) {
@@ -125,10 +135,10 @@ function createMaze(width, height, canvas, ctx) {
             }
         }
 
-        checkCell(cells[c][r + 1]);
-        checkCell(cells[c][r - 1]);
-        checkCell(cells[Math.min(c + 1, c_max)][r]);
-        checkCell(cells[Math.max(c - 1, 0)][r]);
+        checkCell(cells[r][c + 1]);
+        checkCell(cells[r][c - 1]);
+        checkCell(cells[Math.min(r + 1, r_max)][c]);
+        checkCell(cells[Math.max(r - 1, 0)][c]);
         
         if (neighbs.length > 1) { 
             randex = Math.floor(Math.random() * neighbs.length);
@@ -147,6 +157,12 @@ function createMaze(width, height, canvas, ctx) {
         const row_diff = next_cell.row - cur_cell.row;
         const col_diff = next_cell.col - cur_cell.col;
         
+        // console.log(`${cur_cell.row},${cur_cell.col}`, 
+        //     cur_cell.walls, 
+        //     `${next_cell.row},${next_cell.col}`,
+        //     next_cell.walls, 
+        //     row_diff, col_diff);
+
         if (row_diff === -1) {
             next_cell.walls.S = false;
             cur_cell.walls.N = false;

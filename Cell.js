@@ -1,12 +1,12 @@
 // Cell.js
 
 // Cell constructor
-function createCell(row, col, size) {
+function createCell(row, col, size, grid_size) {
     let was_visited = false;
     let was_backtracked = false;
     const walls = {
         N: row === 0,
-        E: true,
+        E: row !== grid_size - 1 || col !== grid_size - 1,
         S: true,
         W: col === 0 && row !== 0 // for "entrance"
     };
