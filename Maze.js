@@ -35,9 +35,6 @@ function createMaze(width, height, canvas, ctx) {
         maze.cells.forEach((row) => {
 
             row.forEach((cell) => {
-                let cell_x = cell.col * cell.size;
-                let cell_y = cell.row * cell.size;
-
                 // fill
                 ctx.fillStyle = "#000000";
                 if (cell.was_visited === true) {
@@ -47,67 +44,7 @@ function createMaze(width, height, canvas, ctx) {
                     ctx.fillStyle = "#202040";
                 }
 
-                ctx.rect(
-                    maze.x + cell_x + 2,
-                    maze.y + cell_y + 2,
-                    cell.size - 4,
-                    cell.size - 4
-                );
-                ctx.fill();
-
-                // stroke
-                if (cell.walls.N === true) {
-                    // ctx.strokeStyle = "#FF0000";
-                    ctx.beginPath();
-                    ctx.moveTo(
-                        maze.x + cell_x,
-                        maze.y + cell_y
-                    );
-                    ctx.lineTo(
-                        maze.x + cell_x + cell.size,
-                        maze.y + cell_y
-                    );
-                    ctx.stroke();
-                }
-                if (cell.walls.W === true) {
-                    // ctx.strokeStyle = "#FFFF00";
-                    ctx.beginPath();
-                    ctx.moveTo(
-                        maze.x + cell_x,
-                        maze.y + cell_y
-                    );
-                    ctx.lineTo(
-                        maze.x + cell_x,
-                        maze.y + cell_y + cell.size
-                    );
-                    ctx.stroke();
-                }
-                if (cell.walls.E === true) {
-                    // ctx.strokeStyle = "#00FF00";
-                    ctx.beginPath();
-                    ctx.moveTo(
-                        maze.x + cell_x + cell.size,
-                        maze.y + cell_y + cell.size
-                    );
-                    ctx.lineTo(
-                        maze.x + cell_x + cell.size,
-                        maze.y + cell_y
-                    );
-                    ctx.stroke();
-                }
-                if (cell.walls.S === true) {
-                    // ctx.strokeStyle = "#0000FF";
-                    ctx.beginPath();
-                    ctx.moveTo(
-                        maze.x + cell_x + cell.size,
-                        maze.y + cell_y + cell.size
-                    );
-                    ctx.lineTo(
-                        maze.x + cell_x,
-                        maze.y + cell_y + cell.size
-                    );
-                    ctx.stroke();
-                }
+                cell.draw(maze, ctx);
             });
         });
     }
@@ -156,12 +93,6 @@ function createMaze(width, height, canvas, ctx) {
         // -1 = up / left | 0 = same | 1 = down / right
         const row_diff = next_cell.row - cur_cell.row;
         const col_diff = next_cell.col - cur_cell.col;
-        
-        // console.log(`${cur_cell.row},${cur_cell.col}`, 
-        //     cur_cell.walls, 
-        //     `${next_cell.row},${next_cell.col}`,
-        //     next_cell.walls, 
-        //     row_diff, col_diff);
 
         if (row_diff === -1) {
             next_cell.walls.S = false;
