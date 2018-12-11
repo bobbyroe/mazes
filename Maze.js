@@ -35,7 +35,7 @@ function createMaze(width, height, canvas, ctx) {
         maze.cells.forEach((row) => {
 
             row.forEach((cell) => {
-                // fill
+                // fill style
                 ctx.fillStyle = "#000000";
                 if (cell.was_visited === true) {
                     ctx.fillStyle = "#202020";    

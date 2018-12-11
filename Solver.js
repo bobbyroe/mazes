@@ -1,6 +1,5 @@
 function createSolver(maze) {
 
-    // recursive backtracker
     const my_stack = [];
     let t = -1;
     let delay = 100;
@@ -11,7 +10,6 @@ function createSolver(maze) {
 
             if (next_cell !== null) {
                 my_stack.push(current_cell);
-                // remove walls from current cell / neighboring cell
                 maze.removeWalls(current_cell, next_cell);
                 delay = 50;
 
@@ -21,7 +19,6 @@ function createSolver(maze) {
                 delay = 10;
             }
             maze.draw();
-            // console.log(current_cell, next_cell);
 
             clearTimeout(t);
             t = setTimeout(() => { recursive_backtracker(next_cell); }, delay);

@@ -1,13 +1,11 @@
 // import createMaze from "./Maze.js";
 // import solver from "./Solver.js";
 
-// create canvas
 let canvas = document.createElement("canvas");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 document.body.appendChild(canvas);
 
-// get context
 let ctx = canvas.getContext("2d");
 
 const maze = createMaze(600, 600, canvas, ctx);
