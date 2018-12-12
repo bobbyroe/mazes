@@ -1,4 +1,3 @@
-// Cell.js
 
 // Cell constructor
 function createCell(row, col, size, grid_size) {
@@ -10,18 +9,16 @@ function createCell(row, col, size, grid_size) {
         S: true,
         W: col === 0 && row !== 0 // for "entrance"
     };
-
-    // set wall thinkness
-    ctx.lineWidth = 4;
-    ctx.strokeStyle = "#00CCFF";
     
-    function draw () {
+    function draw (maze_pos, ctx) {
+
+        let { x: maze_x, y: maze_y } = maze_pos;
         let cell_x = col * size;
         let cell_y = row * size;
         ctx.beginPath();
         ctx.rect(
-            maze.x + cell_x,
-            maze.y + cell_y,
+            maze_x + cell_x,
+            maze_y + cell_y,
             size,
             size
         );
@@ -32,12 +29,12 @@ function createCell(row, col, size, grid_size) {
             // ctx.strokeStyle = "#FF0000";
             ctx.beginPath();
             ctx.moveTo(
-                maze.x + cell_x,
-                maze.y + cell_y
+                maze_x + cell_x,
+                maze_y + cell_y
             );
             ctx.lineTo(
-                maze.x + cell_x + size,
-                maze.y + cell_y
+                maze_x + cell_x + size,
+                maze_y + cell_y
             );
             ctx.stroke();
         }
@@ -45,12 +42,12 @@ function createCell(row, col, size, grid_size) {
             // ctx.strokeStyle = "#FFFF00";
             ctx.beginPath();
             ctx.moveTo(
-                maze.x + cell_x,
-                maze.y + cell_y
+                maze_x + cell_x,
+                maze_y + cell_y
             );
             ctx.lineTo(
-                maze.x + cell_x,
-                maze.y + cell_y + size
+                maze_x + cell_x,
+                maze_y + cell_y + size
             );
             ctx.stroke();
         }
@@ -58,12 +55,12 @@ function createCell(row, col, size, grid_size) {
             // ctx.strokeStyle = "#00FF00";
             ctx.beginPath();
             ctx.moveTo(
-                maze.x + cell_x + size,
-                maze.y + cell_y + size
+                maze_x + cell_x + size,
+                maze_y + cell_y + size
             );
             ctx.lineTo(
-                maze.x + cell_x + size,
-                maze.y + cell_y
+                maze_x + cell_x + size,
+                maze_y + cell_y
             );
             ctx.stroke();
         }
@@ -71,12 +68,12 @@ function createCell(row, col, size, grid_size) {
             // ctx.strokeStyle = "#0000FF";
             ctx.beginPath();
             ctx.moveTo(
-                maze.x + cell_x + size,
-                maze.y + cell_y + size
+                maze_x + cell_x + size,
+                maze_y + cell_y + size
             );
             ctx.lineTo(
-                maze.x + cell_x,
-                maze.y + cell_y + size
+                maze_x + cell_x,
+                maze_y + cell_y + size
             );
             ctx.stroke();
         }
@@ -92,4 +89,4 @@ function createCell(row, col, size, grid_size) {
     }
 }
 
-// export default createCell;
+export default createCell;

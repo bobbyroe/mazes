@@ -1,5 +1,5 @@
-// import createMaze from "./Maze.js";
-// import solver from "./Solver.js";
+import createMaze from "./Maze.js";
+import createSolver from "./Solver.js";
 
 let canvas = document.createElement("canvas");
 canvas.width = window.innerWidth;

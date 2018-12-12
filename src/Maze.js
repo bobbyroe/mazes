@@ -1,5 +1,4 @@
-// import createCell from "./Cell.js";
-// Maze.js
+import createCell from "./Cell.js";
 
 // private
 function _createCells(cell_size, width) {
@@ -27,9 +26,14 @@ function createMaze(width, height, canvas, ctx) {
     const y = middle.y - height * 0.5;
     const cells = _createCells(cell_size, width);
 
+    // set wall thinkness
+    // TODO: move to cell?
+    ctx.lineWidth = 4;
+    ctx.strokeStyle = "#00CCFF";
+
     function draw () {
         ctx.clearRect(x, y, width, height);
-        maze.cells.forEach((row) => {
+        cells.forEach((row) => {
 
             row.forEach((cell) => {
                 // fill style
@@ -41,7 +45,7 @@ function createMaze(width, height, canvas, ctx) {
                     ctx.fillStyle = "#202040";
                 }
 
-                cell.draw(maze, ctx);
+                cell.draw({ x, y }, ctx);
             });
         });
     }
@@ -123,4 +127,4 @@ function createMaze(width, height, canvas, ctx) {
     };
 }
 
-// export default createMaze;
+export default createMaze;

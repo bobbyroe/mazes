@@ -38,4 +38,4 @@ function createSolver (maze) {
 }
 // https://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursive_backtracker
 
-// export default createSolver;
+export default createSolver;
