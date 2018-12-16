@@ -1,5 +1,5 @@
 import createMaze from "./Maze.js";
-import createSolver from "./Solver.js";
+import createSearcher from "./DFS.js";
 
 let canvas = document.createElement("canvas");
 canvas.width = window.innerWidth;
@@ -9,7 +9,7 @@ document.body.appendChild(canvas);
 let ctx = canvas.getContext("2d");
 
 const maze = createMaze(600, 600, canvas, ctx);
-const solver = createSolver(maze);
+const searcher = createSearcher(maze);
 
 // move drawing point to proper pos
 ctx.moveTo(
@@ -18,4 +18,4 @@ ctx.moveTo(
 );
 
 maze.initialize();
-solver.start();
+searcher.start();

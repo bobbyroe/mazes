@@ -1,4 +1,4 @@
-function createSolver (maze) {
+function createSearcher (maze) {
 
     const my_stack = [];
     let t = -1;
@@ -38,4 +38,4 @@ function createSolver (maze) {
 }
 // https://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursive_backtracker
 
-export default createSolver;
+export default createSearcher;

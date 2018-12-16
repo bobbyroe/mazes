@@ -98,6 +98,18 @@ eval("__webpack_require__.r(__webpack_exports__);\n\n// Cell constructor\nfuncti
 
 /***/ }),
 
+/***/ "./src/DFS.js":
+/*!********************!*\
+  !*** ./src/DFS.js ***!
+  \********************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\nfunction createSearcher (maze) {\n\n    const my_stack = [];\n    let t = -1;\n    let delay = 100;\n    function recursive_backtracker(current_cell) {\n        current_cell.was_visited = true;\n        if (maze.has_unvisited_cells() === true) {\n            let next_cell = maze.getRandomNeighborFor(current_cell);\n\n            if (next_cell !== null) {\n                my_stack.push(current_cell);\n                maze.removeWalls(current_cell, next_cell);\n                delay = 50;\n\n            } else if (my_stack.length > 0) {\n                next_cell = my_stack.pop();\n                next_cell.was_backtracked = true;\n                delay = 10;\n            }\n            maze.draw();\n\n            clearTimeout(t);\n            t = setTimeout(() => { recursive_backtracker(next_cell); }, delay);\n        } else {\n            maze.draw();\n            console.log(\"done!\");\n        }\n    }\n\n    function start() {\n        recursive_backtracker(maze.cells[0][0]);\n    }\n\n    return {\n        start\n    };\n}\n// https://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursive_backtracker\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (createSearcher);\n\n//# sourceURL=webpack:///./src/DFS.js?");
+
+/***/ }),
+
 /***/ "./src/Maze.js":
 /*!*********************!*\
   !*** ./src/Maze.js ***!
@@ -110,18 +122,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Cel
 
 /***/ }),
 
-/***/ "./src/Solver.js":
-/*!***********************!*\
-  !*** ./src/Solver.js ***!
-  \***********************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nfunction createSolver (maze) {\n\n    const my_stack = [];\n    let t = -1;\n    let delay = 100;\n    function recursive_backtracker(current_cell) {\n        current_cell.was_visited = true;\n        if (maze.has_unvisited_cells() === true) {\n            let next_cell = maze.getRandomNeighborFor(current_cell);\n\n            if (next_cell !== null) {\n                my_stack.push(current_cell);\n                maze.removeWalls(current_cell, next_cell);\n                delay = 50;\n\n            } else if (my_stack.length > 0) {\n                next_cell = my_stack.pop();\n                next_cell.was_backtracked = true;\n                delay = 10;\n            }\n            maze.draw();\n\n            clearTimeout(t);\n            t = setTimeout(() => { recursive_backtracker(next_cell); }, delay);\n        } else {\n            maze.draw();\n            console.log(\"done!\");\n        }\n    }\n\n    function start() {\n        recursive_backtracker(maze.cells[0][0]);\n    }\n\n    return {\n        start\n    };\n}\n// https://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursive_backtracker\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (createSolver);\n\n//# sourceURL=webpack:///./src/Solver.js?");
-
-/***/ }),
-
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -130,7 +130,7 @@ eval("__webpack_require__.r(__webpack_exports__);\nfunction createSolver (maze) 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Maze_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Maze.js */ \"./src/Maze.js\");\n/* harmony import */ var _Solver_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Solver.js */ \"./src/Solver.js\");\n\n\n\nlet canvas = document.createElement(\"canvas\");\ncanvas.width = window.innerWidth;\ncanvas.height = window.innerHeight;\ndocument.body.appendChild(canvas);\n\nlet ctx = canvas.getContext(\"2d\");\n\nconst maze = Object(_Maze_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(600, 600, canvas, ctx);\nconst solver = Object(_Solver_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(maze);\n\n// move drawing point to proper pos\nctx.moveTo(\n    maze.x,\n    maze.y\n);\n\nmaze.initialize();\nsolver.start();\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Maze_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Maze.js */ \"./src/Maze.js\");\n/* harmony import */ var _DFS_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DFS.js */ \"./src/DFS.js\");\n\n\n\nlet canvas = document.createElement(\"canvas\");\ncanvas.width = window.innerWidth;\ncanvas.height = window.innerHeight;\ndocument.body.appendChild(canvas);\n\nlet ctx = canvas.getContext(\"2d\");\n\nconst maze = Object(_Maze_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(600, 600, canvas, ctx);\nconst searcher = Object(_DFS_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(maze);\n\n// move drawing point to proper pos\nctx.moveTo(\n    maze.x,\n    maze.y\n);\n\nmaze.initialize();\nsearcher.start();\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ })
 
