@@ -1,4 +1,4 @@
-function createSearcher (maze) {
+function createDFS (maze) {
 
     const my_stack = [];
     let t = -1;
@@ -9,7 +9,9 @@ function createSearcher (maze) {
             let next_cell = maze.getRandomNeighborFor(current_cell);
 
             if (next_cell !== null) {
-                my_stack.push(current_cell);
+                // push the CURRENT CELL –
+                // NOT the /next/ cell
+                my_stack.push(current_cell); 
                 maze.removeWalls(current_cell, next_cell);
                 delay = 50;
 
@@ -38,4 +40,4 @@ function createSearcher (maze) {
 }
 // https://en.wikipedia.org/wiki/Maze_generation_algorithm#Recursive_backtracker
 
-export default createSearcher;
+export default createDFS;
