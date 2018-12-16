@@ -18,4 +18,19 @@ ctx.moveTo(
 );
 
 maze.initialize();
-searcher.start();
+
+
+// Event Handlers
+document.body.addEventListener("click", (evt) => {
+
+    if (evt.target.classList.contains("disabled") === false) {
+     
+        if (evt.target.id === "create_maze") {
+            searcher.start();
+        }
+
+        if (evt.target.id === "find_path") {
+            console.log("USE BFS to find a path now");
+        }
+    }
+});
