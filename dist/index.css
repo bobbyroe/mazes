@@ -7,7 +7,22 @@ body {
 * {
     box-sizing: border-box;
 }
-
+.header {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    text-align: center;
+    margin-top: 0px;
+}
+.header h1 {
+    color: #C0C0C0;
+    font-size: 4em;
+    margin-bottom: 0px;
+}
+.header a {
+    color: #00AAFF;
+    font-size: 2em;
+}
 .ctrls {
     position: fixed;
     bottom: 100px;

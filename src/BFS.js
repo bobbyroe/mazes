@@ -41,12 +41,12 @@ function createBFS (maze) {
         let next_cell = exit_cell;
         const path_cells = [];
         while (next_cell != null) {
-            // next_cell.markForShortestPath(true);
             path_cells.push(next_cell);
             next_cell = next_cell.previous_cell;
         } 
         path_cells.reverse();
-        //
+        
+        // recursively draw solution
         let inc = 0;
         function recursive_pathback (cell) {
             cell.markForShortestPath(true);
