@@ -34,22 +34,33 @@ function createBFS (maze) {
                 console.log("oh no, I didn't find the exit!");
             }
         } else {
-            recursive_pathback(a_cell);
+            find_pathback(a_cell);
         }
     }
-
-    function recursive_pathback (cell) {
-        cell.markForShortestPath(true);
-        maze.draw();
-
-        let next_cell = cell.previous_cell;
-        if (next_cell != null) {
-            t = setTimeout(recursive_pathback, delay, next_cell);
-        } else {
-            console.log("DONE");
+    function find_pathback (exit_cell) {
+        let next_cell = exit_cell;
+        const path_cells = [];
+        while (next_cell != null) {
+            // next_cell.markForShortestPath(true);
+            path_cells.push(next_cell);
+            next_cell = next_cell.previous_cell;
+        } 
+        path_cells.reverse();
+        //
+        let inc = 0;
+        function recursive_pathback (cell) {
+            cell.markForShortestPath(true);
+            maze.draw();
+            inc += 1;
+            if (path_cells[inc] != null) {
+                t = setTimeout(recursive_pathback, delay, path_cells[inc]);
+            } else {
+                console.log("DONE");
+            }
         }
-
+        recursive_pathback(path_cells[inc]);
     }
+
     function start() {
 
         let start_cell = maze.cells[0][0];

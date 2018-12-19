@@ -42,7 +42,7 @@ function createMaze(width, height, canvas, ctx) {
                     ctx.fillStyle = "#202020";    
                 } 
                 if (cell.was_backtracked === true) {
-                    ctx.fillStyle = "#202066";
+                    ctx.fillStyle = "#202040";
                 }
                 cell.draw({ x, y }, ctx);
             });
