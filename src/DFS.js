@@ -2,7 +2,8 @@ function createDFS (maze) {
 
     const my_stack = [];
     let t = -1;
-    let delay = 100;
+    let max_delay = 10;
+    let delay = max_delay * 0.5;
     function recursive_backtracker(current_cell) {
         current_cell.was_visited = true;
         if (maze.has_unvisited_cells() === true) {
@@ -13,16 +14,14 @@ function createDFS (maze) {
                 // NOT the /next/ cell
                 my_stack.push(current_cell); 
                 maze.removeWalls(current_cell, next_cell);
-                delay = 50;
 
             } else if (my_stack.length > 0) {
                 next_cell = my_stack.pop();
                 next_cell.was_backtracked = true;
-                delay = 10;
+                delay = max_delay * 0.1;
             }
             maze.draw();
 
-            clearTimeout(t);
             t = setTimeout(() => { recursive_backtracker(next_cell); }, delay);
         } else {
             maze.draw();
