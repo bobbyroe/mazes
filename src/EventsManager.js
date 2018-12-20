@@ -3,20 +3,18 @@ function createEventsManager (context) {
     const listeners = {};
 
     function listenTo (target, evt_name, callback, current_context) {
-
         const scope = current_context != null ? current_context : context;
         const new_listener = {
             target,
             callback,
             context: scope
         };
-
         if (listeners[evt_name]) {
             listeners[evt_name].push(new_listener);
         } else {
             listeners[evt_name] = [new_listener];
         }
-    };
+    }
 
     function stopListening (target, evt_name, callback) {
         const current_listeners = listeners[evt_name];
@@ -41,12 +39,11 @@ function createEventsManager (context) {
             });
             return confirmed !== [];
         }
-    };
+    }
 
     function dispatch(evt_name, caller, params) {
         const [...args] = [caller, params];
         const current_listeners = listeners[evt_name];
-      
         if (current_listeners != null) {
             current_listeners.forEach( (l) => {
                 if (l.target === caller) { 
