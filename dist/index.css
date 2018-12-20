@@ -79,4 +79,9 @@ a[class*="btn"] {text-decoration: none;}
 .btn.yellow {box-shadow:0px 4px 0px #D1B757;}
 .btn.yellow:active {box-shadow: 0 0 #ff4c4b; background-color: #D6BB59;}
 
+.btn.disabled {
+    color: #e0e0e0;
+    background-color: #808080;
+    box-shadow: 0px 4px #606060;
+}
 /* lifted from https://1stwebdesigner.com/free-code-snippets-css-buttons/ */
