@@ -1,5 +1,6 @@
 import createCell from "./Cell.js";
 import createMazeManager from "./MazeManager.js";
+import createEventsManager from "./EventsManager.js"
 // private
 function _createCells(cell_size, width) {
     let grid_size = Math.floor(width / cell_size);
@@ -15,8 +16,10 @@ function _createCells(cell_size, width) {
 }
 
 // Maze constructor
-function createMaze(width, height, canvas, ctx) {
-
+// @config_obj 
+function createMaze( config_obj) {
+    const { width, height, canvas } = config_obj;
+    const eventsBus = createEventsManager();
     const cell_size = 40;
     const middle = {
         x: canvas.width * 0.5,
@@ -79,7 +82,8 @@ function createMaze(width, height, canvas, ctx) {
         has_unvisited_cells,
         getRandomNeighborFor: manager.getRandomNeighborFor,
         getAdjacentsFor: manager.getAdjacentsFor,
-        removeWalls: manager.removeWalls
+        removeWalls: manager.removeWalls,
+        eventsBus
     };
 }
 

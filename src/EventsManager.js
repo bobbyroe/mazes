@@ -1,7 +1,9 @@
-// @context - App Object perhaps
+// @context - your application object:
+//  pass in this as the default context
+//  ex: events = new Events(Application);
+//  or on it's own ... var Event_Manager = new Events();
 function createEventsManager (context) {
     const listeners = {};
-
     // @target - the scope where the @callback is defined
     // @evt_name - string
     // @callback - function

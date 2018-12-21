@@ -1,7 +1,7 @@
 import createMaze from "./Maze.js";
 import createDFS from "./DFS.js";
 import createBFS from "./BFS.js";
-import createEventsManager from "./EventsManager.js"
+import createUIManager from "./UIManager.js";
 
 let canvas = document.createElement("canvas");
 canvas.width = window.innerWidth;
@@ -10,9 +10,15 @@ document.body.appendChild(canvas);
 
 let ctx = canvas.getContext("2d");
 
-const maze = createMaze(600, 600, canvas, ctx);
+const maze = createMaze({ 
+    width: 600,
+    height: 600, 
+    canvas
+});
 const searcher = createDFS(maze);
 const solver = createBFS(maze);
+const UI = createUIManager(maze);
+
 // move drawing point to proper pos
 ctx.moveTo(
     maze.x,
@@ -21,9 +27,8 @@ ctx.moveTo(
 
 maze.initialize();
 
-// debug
-window.maze = maze;
-
+// Maze Event Messaging
+eventsBus.listenTo(maze, "MAZE_INITIALIZED", UI.update);
 // Event Handlers
 document.body.addEventListener("click", (evt) => {
 
@@ -41,7 +46,5 @@ document.body.addEventListener("click", (evt) => {
 });
 
 
-// testing Events
-const eventsBus = createEventsManager(maze);
-window.maze = maze; 
-window.eventsBus = eventsBus;
+// debug
+window.maze = maze;
