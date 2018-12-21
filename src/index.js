@@ -1,6 +1,7 @@
 import createMaze from "./Maze.js";
 import createDFS from "./DFS.js";
 import createBFS from "./BFS.js";
+import createEventsManager from "./EventsManager.js"
 
 let canvas = document.createElement("canvas");
 canvas.width = window.innerWidth;
@@ -38,3 +39,9 @@ document.body.addEventListener("click", (evt) => {
         }
     }
 });
+
+
+// testing Events
+const eventsBus = createEventsManager(maze);
+window.maze = maze; 
+window.eventsBus = eventsBus;

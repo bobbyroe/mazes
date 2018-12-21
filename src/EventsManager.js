@@ -1,9 +1,13 @@
-
+// @context - App Object perhaps
 function createEventsManager (context) {
     const listeners = {};
 
-    function listenTo (target, evt_name, callback, current_context) {
-        const scope = current_context != null ? current_context : context;
+    // @target - the scope where the @callback is defined
+    // @evt_name - string
+    // @callback - function
+    // @opt_current_context – alternate context
+    function listenTo (target, evt_name, callback, opt_current_context) {
+        const scope = opt_current_context != null ? opt_current_context : context;
         const new_listener = {
             target,
             callback,
@@ -15,7 +19,9 @@ function createEventsManager (context) {
             listeners[evt_name] = [new_listener];
         }
     }
-
+    // @target - the scope where the @callback is defined
+    // @evt_name - string
+    // @callback - function
     function stopListening (target, evt_name, callback) {
         const current_listeners = listeners[evt_name];
         const leftovers = [];
@@ -27,26 +33,32 @@ function createEventsManager (context) {
                 }
             });
             listeners[evt_name] = leftovers;
+            // should I delete the [evt_name] property from listeners too?
         }
     }
-
+    // @target - the scope where the @callback is defined
+    // @evt_name - string
+    // @callback - function
     function isListening (target, evt_name, callback) {
         const current_listeners = listeners[evt_name];
-        const confirmed = [];
+        let confirmed = [];
         if (current_listeners != null) {
             confirmed = current_listeners.filter(function (item) {
                 return item.target === target && item.callback === callback;
             });
-            return confirmed !== [];
         }
+        console.log("isListening", listeners);
+        return confirmed.length > 0;
     }
-
+    // @evt_name - string
+    // @caller - the caller
+    // @params - pass as many arguments as you want
     function dispatch(evt_name, caller, params) {
         const [...args] = [caller, params];
         const current_listeners = listeners[evt_name];
         if (current_listeners != null) {
-            current_listeners.forEach( (l) => {
-                if (l.target === caller) { 
+            current_listeners.forEach( (lsnr) => {
+                if (lsnr.target === caller) { 
                     lsnr.callback.apply(lsnr.context, args);
                 }
             });
