@@ -6,12 +6,8 @@ function createCell(row, col, size, grid_size) {
     let previous_cell;
     let is_exit_cell = (row === grid_size - 1)
             && (col === grid_size - 1);
-    const walls = {
-        N: row === 0,
-        E: row !== grid_size - 1 || col !== grid_size - 1,
-        S: true,
-        W: col === 0 && row !== 0 // for "entrance"
-    };
+    let walls;
+    initializeWalls();
     let is_on_shortest_path = false;
     
     function draw (maze_pos, ctx) {
@@ -90,6 +86,19 @@ function createCell(row, col, size, grid_size) {
         }
     }
 
+    function removeWall (on_side) {
+        walls[on_side] = false;
+    }
+
+    function initializeWalls () {
+        walls = {
+            N: row === 0,
+            E: row !== grid_size - 1 || col !== grid_size - 1,
+            S: true,
+            W: col === 0 && row !== 0 // for "entrance"
+        };
+    }
+
     function markForShortestPath (is_shortest) {
         is_on_shortest_path = is_shortest;
     }
@@ -104,7 +113,9 @@ function createCell(row, col, size, grid_size) {
         is_exit_cell,
         walls,
         draw,
-        markForShortestPath
+        markForShortestPath,
+        initializeWalls,
+        removeWall
     }
 }
 

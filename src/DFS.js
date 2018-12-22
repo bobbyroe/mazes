@@ -1,9 +1,11 @@
-function createDFS (maze) {
+function createDFS (app) {
 
+    const { maze, eventsBus } = app;
     const my_stack = [];
     let t = -1;
     let max_delay = 10;
     let delay = max_delay * 0.5;
+    let DFS_was_completed = false;
     function recursive_backtracker(current_cell) {
         current_cell.was_visited = true;
         if (maze.has_unvisited_cells() === true) {
@@ -25,14 +27,29 @@ function createDFS (maze) {
             t = setTimeout(() => { recursive_backtracker(next_cell); }, delay);
         } else {
             maze.draw();
-            console.log("done!");
+            eventsBus.dispatch("MAZE_CREATED");
+            DFS_was_completed = true;
         }
+    }
+
+    function handleCreateMaze () {
+        if (DFS_was_completed === false) {
+            start();
+        } else {
+            maze.reinititalize();
+        }
+    }
+
+    function handleMazeInit () {
+        DFS_was_completed = false;
     }
 
     function start() {
         recursive_backtracker(maze.cells[0][0]);
     }
 
+    eventsBus.listenTo("MAZE_INITIALIZED", handleMazeInit);
+    eventsBus.listenTo("CREATE_MAZE", handleCreateMaze);
     return {
         start
     };

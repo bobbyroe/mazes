@@ -78,22 +78,26 @@ function createMazeManager (cells) {
         // -1 = up / left | 0 = same | 1 = down / right
         const row_diff = next_cell.row - cur_cell.row;
         const col_diff = next_cell.col - cur_cell.col;
+        let on_side_next = "";
+        let on_side_current = "";
         if (row_diff === -1) {
-            next_cell.walls.S = false;
-            cur_cell.walls.N = false;
+            on_side_next = "S";
+            on_side_current = "N";
         }
         if (row_diff === 1) {
-            next_cell.walls.N = false;
-            cur_cell.walls.S = false;
+            on_side_next = "N";
+            on_side_current = "S";
         }
         if (col_diff === -1) {
-            next_cell.walls.E = false;
-            cur_cell.walls.W = false;
+            on_side_next = "E";
+            on_side_current = "W";
         }
         if (col_diff === 1) {
-            next_cell.walls.W = false;
-            cur_cell.walls.E = false;
+            on_side_next = "W";
+            on_side_current = "E";
         }
+        next_cell.removeWall(on_side_next);
+        cur_cell.removeWall(on_side_current);
     }
 
     return {

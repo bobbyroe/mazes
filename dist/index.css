@@ -80,8 +80,42 @@ a[class*="btn"] {text-decoration: none;}
 .btn.yellow:active {box-shadow: 0 0 #ff4c4b; background-color: #D6BB59;}
 
 .btn.disabled {
-    color: #e0e0e0;
+    color: #a0a0a0;
     background-color: #808080;
     box-shadow: 0px 4px #606060;
 }
 /* lifted from https://1stwebdesigner.com/free-code-snippets-css-buttons/ */
+
+/************************************************************************************
+MEDIA QUERIES
+*************************************************************************************/
+/* less than 1024px: iPad Portrait */
+@media screen and (max-width: 1023px) {
+    .header {
+        
+    }
+    .header h1 {
+        margin-top: 12px;
+        font-size: 3em;
+    }
+    .header a {
+        font-size: 1.5em;
+    }
+    .ctrls {
+        bottom: 20px;
+    }
+}
+/* less than 768px  iPhone Landscape */
+/* @media screen and (max-width: 767px) {
+  #root {
+    width: 450px;
+  }
+}
+*/
+/* less than 480px  iPhone Portrait */
+/*
+@media screen and (max-width: 479px) {
+  #root {
+    width: 290px;
+  }
+} */

@@ -1,7 +1,8 @@
 import createQueue from "./Queue.js";
 
-function createBFS (maze) {
+function createBFS (app) {
     
+    const { maze, eventsBus } = app;
     let t = -1;
     const queue = createQueue();
     const delay = 50;
@@ -55,20 +56,21 @@ function createBFS (maze) {
             if (path_cells[inc] != null) {
                 t = setTimeout(recursive_pathback, delay, path_cells[inc]);
             } else {
-                console.log("DONE");
+                eventsBus.dispatch("MAZE_SOLVED");
             }
         }
         recursive_pathback(path_cells[inc]);
     }
 
     function start() {
-
+        maze.clear();
         let start_cell = maze.cells[0][0];
         start_cell.was_visited = true;
 
         recursive_search(start_cell);
     }
 
+    eventsBus.listenTo("FIND_PATH", start);
     return {
         start
     }
