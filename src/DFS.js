@@ -36,7 +36,7 @@ function createDFS (app) {
         if (DFS_was_completed === false) {
             start();
         } else {
-            maze.reinititalize();
+            eventsBus.dispatch("REINITIALIZE_ALL");
         }
     }
 

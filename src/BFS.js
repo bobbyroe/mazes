@@ -5,7 +5,7 @@ function createBFS (app) {
     const { maze, eventsBus } = app;
     let t = -1;
     const queue = createQueue();
-    const delay = 50;
+    const delay = 20;
     function recursive_search (active_cell) {
         let next_cell;
         let a_cell;

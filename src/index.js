@@ -13,8 +13,6 @@ let ctx = canvas.getContext("2d");
 
 const eventsBus = createEventsManager();
 const maze = createMaze({ 
-    width: 600,
-    height: 600, 
     canvas,
     eventsBus
 });
@@ -31,9 +29,9 @@ maze.initialize();
 // debug
 window.maze = maze;
 
-eventsBus.listenTo(maze, "CREATE_MAZE", maze.handleCreateMaze);
-eventsBus.listenTo(maze, "FIND_PATH", maze.handleFindPath);
-
+eventsBus.listenTo("REINITIALIZE_ALL", () => {
+    window.location.reload();
+});
 /*
 // maze publish -> MAZE_INITIALIZED
 // DFS publish -> MAZE_CREATED

@@ -9,17 +9,12 @@ function createUIManager(eventsBus) {
 
     function handleMazeInit () {
         console.log("handleMazeInit!");
-        // .create_maze is enabled, text is "Create Maze"
-        // .find_path is disabled
         create_maze_btn.innerText = "Create Maze";
         create_maze_btn.classList.remove("disabled");
-        // find_path_btn.classList.add("disabled");
     }
     
     function handleMazeCreated () {
         console.log("handleMazeCreated!");
-        // .create_maze is enabled, text is "Recreate Maze"
-        // .find_path is enabled
         create_maze_btn.innerText = "Clear Maze";
         create_maze_btn.classList.remove("disabled");
         find_path_btn.classList.remove("disabled");
@@ -27,11 +22,8 @@ function createUIManager(eventsBus) {
 
     function handleMazeSolved () {
         console.log("update!");
-        // .create_maze is enabled, text is "Recreate Maze"
-        // .find_path is disabled
         create_maze_btn.innerText = "Clear Maze";
         create_maze_btn.classList.remove("disabled");
-        // find_path_btn.classList.add("disabled");
     }
 
     function disableButtons () {
