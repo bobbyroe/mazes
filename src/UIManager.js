@@ -8,20 +8,17 @@ function createUIManager(eventsBus) {
     const find_path_btn = document.body.querySelector("#find_path");
 
     function handleMazeInit () {
-        console.log("handleMazeInit!");
         create_maze_btn.innerText = "Create Maze";
         create_maze_btn.classList.remove("disabled");
     }
     
     function handleMazeCreated () {
-        console.log("handleMazeCreated!");
         create_maze_btn.innerText = "Clear Maze";
         create_maze_btn.classList.remove("disabled");
         find_path_btn.classList.remove("disabled");
     }
 
     function handleMazeSolved () {
-        console.log("update!");
         create_maze_btn.innerText = "Clear Maze";
         create_maze_btn.classList.remove("disabled");
     }
@@ -50,8 +47,7 @@ function createUIManager(eventsBus) {
         }
     });
 
-    return {
-    }
+    return {};
 }
 
 export default createUIManager;

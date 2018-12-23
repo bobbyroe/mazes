@@ -8,13 +8,14 @@ function createCell(row, col, size, grid_size) {
             && (col === grid_size - 1);
     let walls;
     initializeWalls();
-    let is_on_shortest_path = false;
+    let direction_to_shortest_path = "";
     
     function draw (maze_pos, ctx) {
 
         let { x: maze_x, y: maze_y } = maze_pos;
         let cell_x = col * size;
         let cell_y = row * size;
+
         ctx.beginPath();
         ctx.rect(
             maze_x + cell_x,
@@ -73,15 +74,21 @@ function createCell(row, col, size, grid_size) {
             );
             ctx.stroke();
         }
-        if (is_on_shortest_path === true) {
+        if (direction_to_shortest_path !== "") {
             ctx.fillStyle = "#FF9900";
             ctx.beginPath();
-            ctx.arc(
+            ctx.moveTo(
                 maze_x + cell_x + size * 0.5,
-                maze_y + cell_y + size * 0.5, 
-                size * 0.1, 
-                0, 
-                2 * Math.PI);
+                maze_y + cell_y + size * 0.25
+            ); 
+            ctx.lineTo(
+                maze_x + cell_x + size * 0.6,
+                maze_y + cell_y + size * 0.6
+            );
+            ctx.lineTo(
+                maze_x + cell_x + size * 0.4,
+                maze_y + cell_y + size * 0.6
+            );
             ctx.fill();
         }
     }
@@ -99,8 +106,8 @@ function createCell(row, col, size, grid_size) {
         };
     }
 
-    function markForShortestPath (is_shortest) {
-        is_on_shortest_path = is_shortest;
+    function markDirectionForShortestPath (dir) {
+        direction_to_shortest_path = dir;
     }
 
     return {
@@ -113,7 +120,7 @@ function createCell(row, col, size, grid_size) {
         is_exit_cell,
         walls,
         draw,
-        markForShortestPath,
+        markDirectionForShortestPath,
         initializeWalls,
         removeWall
     }

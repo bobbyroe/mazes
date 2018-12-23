@@ -50,7 +50,7 @@ function createBFS (app) {
         // recursively draw solution
         let inc = 0;
         function recursive_pathback (cell) {
-            cell.markForShortestPath(true);
+            cell.markDirectionForShortestPath("Z");
             maze.draw();
             inc += 1;
             if (path_cells[inc] != null) {
