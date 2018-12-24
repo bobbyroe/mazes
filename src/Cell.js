@@ -80,63 +80,67 @@ function createCell(row, col, size, grid_size) {
             // console.log("dir:", arrow_direction);
             ctx.fillStyle = "#FF9900";
             ctx.beginPath();
-            if (arrow_direction === "N") {
-                ctx.moveTo(
-                    cell_x + size * 0.5,
-                    cell_y + size * 0.5
-                ); 
-                ctx.lineTo(
-                    cell_x + size * 0.6,
-                    cell_y + size * 0.85
-                );
-                ctx.lineTo(
-                    cell_x + size * 0.4,
-                    cell_y + size * 0.85
-                );
-            }
-            if (arrow_direction === "E") {
-                ctx.moveTo(
-                    cell_x + size * 0.5,
-                    cell_y + size * 0.5
-                );
-                ctx.lineTo(
-                    cell_x + size * 0.15,
-                    cell_y + size * 0.6
-                );
-                ctx.lineTo(
-                    cell_x + size * 0.15,
-                    cell_y + size * 0.4
-                );
-            }
-            if (arrow_direction === "S") {
-                ctx.moveTo(
-                    cell_x + size * 0.5,
-                    cell_y + size * 0.5
-                );
-                ctx.lineTo(
-                    cell_x + size * 0.4,
-                    cell_y + size * 0.15
-                );
-                ctx.lineTo(
-                    cell_x + size * 0.6,
-                    cell_y + size * 0.15
-                );
-            }
-            if (arrow_direction === "W") {
-                ctx.moveTo(
-                    cell_x + size * 0.5,
-                    cell_y + size * 0.5
-                );
-                ctx.lineTo(
-                    cell_x + size * 0.85,
-                    cell_y + size * 0.4
-                );
-                ctx.lineTo(
-                    cell_x + size * 0.85,
-                    cell_y + size * 0.6
-                );
-            }
+            _drawArrow(cell_x, cell_y, ctx);
             ctx.fill();
+        }
+    }
+
+    function _drawArrow(cell_x, cell_y, ctx) {
+        if (arrow_direction === "N") {
+            ctx.moveTo(
+                cell_x + size * 0.5,
+                cell_y + size * 0.5
+            );
+            ctx.lineTo(
+                cell_x + size * 0.6,
+                cell_y + size * 0.85
+            );
+            ctx.lineTo(
+                cell_x + size * 0.4,
+                cell_y + size * 0.85
+            );
+        }
+        if (arrow_direction === "E") {
+            ctx.moveTo(
+                cell_x + size * 0.5,
+                cell_y + size * 0.5
+            );
+            ctx.lineTo(
+                cell_x + size * 0.15,
+                cell_y + size * 0.6
+            );
+            ctx.lineTo(
+                cell_x + size * 0.15,
+                cell_y + size * 0.4
+            );
+        }
+        if (arrow_direction === "S") {
+            ctx.moveTo(
+                cell_x + size * 0.5,
+                cell_y + size * 0.5
+            );
+            ctx.lineTo(
+                cell_x + size * 0.4,
+                cell_y + size * 0.15
+            );
+            ctx.lineTo(
+                cell_x + size * 0.6,
+                cell_y + size * 0.15
+            );
+        }
+        if (arrow_direction === "W") {
+            ctx.moveTo(
+                cell_x + size * 0.5,
+                cell_y + size * 0.5
+            );
+            ctx.lineTo(
+                cell_x + size * 0.85,
+                cell_y + size * 0.4
+            );
+            ctx.lineTo(
+                cell_x + size * 0.85,
+                cell_y + size * 0.6
+            );
         }
     }
 
