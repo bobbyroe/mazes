@@ -30,13 +30,13 @@ function createMazeManager (cells) {
         return random_neighbor;
     }
 
-    function getAdjacentsFor(cell) {
+    function getAdjacentsFor (cell) {
         const neighbs = [];
         const c = cell.col;
         const r = cell.row;
         const r_max = cells.length - 1;
 
-        function hasWallsBetween(cur_cell, next_cell) {
+        function hasWallsBetween (cur_cell, next_cell) {
             const row_diff = next_cell.row - cur_cell.row;
             const col_diff = next_cell.col - cur_cell.col;
             let has_walls = false;

@@ -8,18 +8,19 @@ function createCell(row, col, size, grid_size) {
             && (col === grid_size - 1);
     let walls;
     initializeWalls();
-    let direction_to_shortest_path = "";
+    let is_on_shortest_path = false;
+    let arrow_direction = "";
     
     function draw (maze_pos, ctx) {
 
         let { x: maze_x, y: maze_y } = maze_pos;
-        let cell_x = col * size;
-        let cell_y = row * size;
+        let cell_x = maze_x + (col * size);
+        let cell_y = maze_y + (row * size);
 
         ctx.beginPath();
         ctx.rect(
-            maze_x + cell_x,
-            maze_y + cell_y,
+            cell_x,
+            cell_y,
             size,
             size
         );
@@ -29,66 +30,112 @@ function createCell(row, col, size, grid_size) {
         if (walls.N === true) {
             ctx.beginPath();
             ctx.moveTo(
-                maze_x + cell_x,
-                maze_y + cell_y
+                cell_x,
+                cell_y
             );
             ctx.lineTo(
-                maze_x + cell_x + size,
-                maze_y + cell_y
+                cell_x + size,
+                cell_y
             );
             ctx.stroke();
         }
         if (walls.W === true) {
             ctx.beginPath();
             ctx.moveTo(
-                maze_x + cell_x,
-                maze_y + cell_y
+                cell_x,
+                cell_y
             );
             ctx.lineTo(
-                maze_x + cell_x,
-                maze_y + cell_y + size
+                cell_x,
+                cell_y + size
             );
             ctx.stroke();
         }
         if (walls.E === true) {
             ctx.beginPath();
             ctx.moveTo(
-                maze_x + cell_x + size,
-                maze_y + cell_y + size
+                cell_x + size,
+                cell_y + size
             );
             ctx.lineTo(
-                maze_x + cell_x + size,
-                maze_y + cell_y
+                cell_x + size,
+                cell_y
             );
             ctx.stroke();
         }
         if (walls.S === true) {
             ctx.beginPath();
             ctx.moveTo(
-                maze_x + cell_x + size,
-                maze_y + cell_y + size
+                cell_x + size,
+                cell_y + size
             );
             ctx.lineTo(
-                maze_x + cell_x,
-                maze_y + cell_y + size
+                cell_x,
+                cell_y + size
             );
             ctx.stroke();
         }
-        if (direction_to_shortest_path !== "") {
+        // draw direction arrow
+        if (is_on_shortest_path === true) {
+            // console.log("dir:", arrow_direction);
             ctx.fillStyle = "#FF9900";
             ctx.beginPath();
-            ctx.moveTo(
-                maze_x + cell_x + size * 0.5,
-                maze_y + cell_y + size * 0.25
-            ); 
-            ctx.lineTo(
-                maze_x + cell_x + size * 0.6,
-                maze_y + cell_y + size * 0.6
-            );
-            ctx.lineTo(
-                maze_x + cell_x + size * 0.4,
-                maze_y + cell_y + size * 0.6
-            );
+            if (arrow_direction === "N") {
+                ctx.moveTo(
+                    cell_x + size * 0.5,
+                    cell_y + size * 0.5
+                ); 
+                ctx.lineTo(
+                    cell_x + size * 0.6,
+                    cell_y + size * 0.85
+                );
+                ctx.lineTo(
+                    cell_x + size * 0.4,
+                    cell_y + size * 0.85
+                );
+            }
+            if (arrow_direction === "E") {
+                ctx.moveTo(
+                    cell_x + size * 0.5,
+                    cell_y + size * 0.5
+                );
+                ctx.lineTo(
+                    cell_x + size * 0.15,
+                    cell_y + size * 0.6
+                );
+                ctx.lineTo(
+                    cell_x + size * 0.15,
+                    cell_y + size * 0.4
+                );
+            }
+            if (arrow_direction === "S") {
+                ctx.moveTo(
+                    cell_x + size * 0.5,
+                    cell_y + size * 0.5
+                );
+                ctx.lineTo(
+                    cell_x + size * 0.4,
+                    cell_y + size * 0.15
+                );
+                ctx.lineTo(
+                    cell_x + size * 0.6,
+                    cell_y + size * 0.15
+                );
+            }
+            if (arrow_direction === "W") {
+                ctx.moveTo(
+                    cell_x + size * 0.5,
+                    cell_y + size * 0.5
+                );
+                ctx.lineTo(
+                    cell_x + size * 0.85,
+                    cell_y + size * 0.4
+                );
+                ctx.lineTo(
+                    cell_x + size * 0.85,
+                    cell_y + size * 0.6
+                );
+            }
             ctx.fill();
         }
     }
@@ -106,8 +153,9 @@ function createCell(row, col, size, grid_size) {
         };
     }
 
-    function markDirectionForShortestPath (dir) {
-        direction_to_shortest_path = dir;
+    function markForShortestPathWithDirection (is_shortest, dir) {
+        is_on_shortest_path = is_shortest;
+        arrow_direction = dir;
     }
 
     return {
@@ -120,7 +168,7 @@ function createCell(row, col, size, grid_size) {
         is_exit_cell,
         walls,
         draw,
-        markDirectionForShortestPath,
+        markForShortestPathWithDirection,
         initializeWalls,
         removeWall
     }
