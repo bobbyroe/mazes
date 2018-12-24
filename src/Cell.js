@@ -76,7 +76,7 @@ function createCell(row, col, size, grid_size) {
             ctx.stroke();
         }
         // draw direction arrow
-        if (is_on_shortest_path === true) {
+        if (this.is_on_shortest_path === true) {
             // console.log("dir:", arrow_direction);
             ctx.fillStyle = "#FF9900";
             ctx.beginPath();
@@ -86,7 +86,7 @@ function createCell(row, col, size, grid_size) {
     }
 
     function _drawArrow(cell_x, cell_y, ctx) {
-        if (arrow_direction === "N") {
+        if (this.arrow_direction === "N") {
             ctx.moveTo(
                 cell_x + size * 0.5,
                 cell_y + size * 0.5
@@ -100,7 +100,7 @@ function createCell(row, col, size, grid_size) {
                 cell_y + size * 0.85
             );
         }
-        if (arrow_direction === "E") {
+        if (this.arrow_direction === "E") {
             ctx.moveTo(
                 cell_x + size * 0.5,
                 cell_y + size * 0.5
@@ -114,7 +114,7 @@ function createCell(row, col, size, grid_size) {
                 cell_y + size * 0.4
             );
         }
-        if (arrow_direction === "S") {
+        if (this.arrow_direction === "S") {
             ctx.moveTo(
                 cell_x + size * 0.5,
                 cell_y + size * 0.5
@@ -128,7 +128,7 @@ function createCell(row, col, size, grid_size) {
                 cell_y + size * 0.15
             );
         }
-        if (arrow_direction === "W") {
+        if (this.arrow_direction === "W") {
             ctx.moveTo(
                 cell_x + size * 0.5,
                 cell_y + size * 0.5
@@ -145,11 +145,11 @@ function createCell(row, col, size, grid_size) {
     }
 
     function removeWall (on_side) {
-        walls[on_side] = false;
+        this.walls[on_side] = false;
     }
 
     function initializeWalls () {
-        walls = {
+        this.walls = {
             N: row === 0,
             E: row !== grid_size - 1 || col !== grid_size - 1,
             S: true,
@@ -158,8 +158,8 @@ function createCell(row, col, size, grid_size) {
     }
 
     function markForShortestPathWithDirection (is_shortest, dir) {
-        is_on_shortest_path = is_shortest;
-        arrow_direction = dir;
+        this.is_on_shortest_path = is_shortest;
+        this.arrow_direction = dir;
     }
 
     return {
