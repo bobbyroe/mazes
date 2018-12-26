@@ -85,8 +85,6 @@ function createMaze (config_obj) {
         clear,
         draw,
         initialize,
-        width,
-        height,
         x,
         y,
         cells,

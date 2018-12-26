@@ -6,8 +6,12 @@ function createCell(row, col, size, grid_size) {
     let previous_cell;
     let is_exit_cell = (row === grid_size - 1)
             && (col === grid_size - 1);
-    let walls;
-    initializeWalls();
+    let walls = {
+        N: row === 0,
+        E: row !== grid_size - 1 || col !== grid_size - 1,
+        S: true,
+        W: col === 0 && row !== 0 // for "entrance"
+    };
     let is_on_shortest_path = false;
     let arrow_direction = "";
     
@@ -76,17 +80,17 @@ function createCell(row, col, size, grid_size) {
             ctx.stroke();
         }
         // draw direction arrow
-        if (is_on_shortest_path === true) {
-            // console.log("dir:", arrow_direction);
+        if (this.is_on_shortest_path === true) {
+            // console.log("dir:", this.arrow_direction);
             ctx.fillStyle = "#FF9900";
             ctx.beginPath();
-            _drawArrow(cell_x, cell_y, ctx);
+            _drawArrow(cell_x, cell_y, ctx, this.arrow_direction);
             ctx.fill();
         }
     }
 
-    function _drawArrow(cell_x, cell_y, ctx) {
-        if (arrow_direction === "N") {
+    function _drawArrow(cell_x, cell_y, ctx, dir) {
+        if (dir === "N") {
             ctx.moveTo(
                 cell_x + size * 0.5,
                 cell_y + size * 0.5
@@ -100,7 +104,7 @@ function createCell(row, col, size, grid_size) {
                 cell_y + size * 0.85
             );
         }
-        if (arrow_direction === "E") {
+        if (dir === "E") {
             ctx.moveTo(
                 cell_x + size * 0.5,
                 cell_y + size * 0.5
@@ -114,7 +118,7 @@ function createCell(row, col, size, grid_size) {
                 cell_y + size * 0.4
             );
         }
-        if (arrow_direction === "S") {
+        if (dir === "S") {
             ctx.moveTo(
                 cell_x + size * 0.5,
                 cell_y + size * 0.5
@@ -128,7 +132,7 @@ function createCell(row, col, size, grid_size) {
                 cell_y + size * 0.15
             );
         }
-        if (arrow_direction === "W") {
+        if (dir === "W") {
             ctx.moveTo(
                 cell_x + size * 0.5,
                 cell_y + size * 0.5
@@ -162,7 +166,8 @@ function createCell(row, col, size, grid_size) {
         is_exit_cell,
         walls,
         draw,
-        initializeWalls
+        initializeWalls,
+        arrow_direction
     }
 }
 
