@@ -74,7 +74,8 @@ function createBFS (app) {
         let inc = 0;
         function recursive_pathback (cell) {
             let dir = getPathDirection(cell);
-            cell.markForShortestPathWithDirection(true, dir);
+            cell.is_on_shortest_path = true;
+            cell.arrow_direction = dir;
             maze.draw();
             inc += 1;
             if (path_cells[inc] != null) {

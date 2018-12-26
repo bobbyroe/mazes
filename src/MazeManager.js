@@ -96,8 +96,8 @@ function createMazeManager (cells) {
             on_side_next = "W";
             on_side_current = "E";
         }
-        next_cell.removeWall(on_side_next);
-        cur_cell.removeWall(on_side_current);
+        next_cell.walls[on_side_next] = false;
+        cur_cell.walls[on_side_current] = false;
     }
 
     return {
