@@ -32,7 +32,7 @@ function createMaze (config_obj) {
     const x = middle.x - width * 0.5;
     const y = middle.y - height * 0.5;
     const cells = _createCells(cell_size, width);
-    const manager = createMazeManager(cells);``
+    const manager = createMazeManager(cells);
     
     // set wall thinkness
     // TODO: move to cell?

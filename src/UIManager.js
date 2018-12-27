@@ -47,6 +47,7 @@ function createUIManager(eventsBus) {
         }
     });
 
+    // API = 0;
     return {};
 }
 

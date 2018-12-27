@@ -95,6 +95,8 @@ function createBFS (app) {
     }
 
     eventsBus.listenTo("FIND_PATH", start);
+
+    // API
     return {
         start
     }
@@ -102,24 +104,4 @@ function createBFS (app) {
 
 // https://en.wikipedia.org/wiki/Maze_solving_algorithm
 
-export default createBFS
-
-
-/*
-
-start with 1st cell
-mark it visited
----------
-
-*mark it as active cell*
-for each unvisited neighbor cell:
-    mark it visited
-    record it's parent / previous cell
-    add it to the queue
-
-if queue is not empty
-    pop next cell from queue
-else 
-    we're done!
-    backtrack to the start cell
-*/
+export default createBFS;

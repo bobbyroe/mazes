@@ -50,6 +50,8 @@ function createDFS (app) {
 
     eventsBus.listenTo("MAZE_INITIALIZED", handleMazeInit);
     eventsBus.listenTo("CREATE_MAZE", handleCreateMaze);
+
+    // API
     return {
         start
     };
