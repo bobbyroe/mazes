@@ -38,6 +38,7 @@ function createBFS (app) {
             find_pathback(a_cell);
         }
     }
+    
     function find_pathback (exit_cell) {
         let next_cell = exit_cell;
         const path_cells = [];
@@ -69,7 +70,6 @@ function createBFS (app) {
             }
             return dir;
         }
-
         // recursively draw solution
         let inc = 0;
         function recursive_pathback (cell) {
@@ -96,6 +96,8 @@ function createBFS (app) {
     }
 
     eventsBus.listenTo("FIND_PATH", start);
+
+    // API
     return {
         start
     }
@@ -104,23 +106,3 @@ function createBFS (app) {
 // https://en.wikipedia.org/wiki/Maze_solving_algorithm
 
 export default createBFS
-
-
-/*
-
-start with 1st cell
-mark it visited
----------
-
-*mark it as active cell*
-for each unvisited neighbor cell:
-    mark it visited
-    record it's parent / previous cell
-    add it to the queue
-
-if queue is not empty
-    pop next cell from queue
-else 
-    we're done!
-    backtrack to the start cell
-*/

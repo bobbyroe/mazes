@@ -81,7 +81,6 @@ function createCell(row, col, size, grid_size) {
         }
         // draw direction arrow
         if (this.is_on_shortest_path === true) {
-            // console.log("dir:", this.arrow_direction);
             ctx.fillStyle = "#FF9900";
             ctx.beginPath();
             _drawArrow(cell_x, cell_y, ctx, this.arrow_direction);
