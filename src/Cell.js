@@ -1,5 +1,5 @@
 
-// Cell constructor
+// constructor
 function createCell(row, col, size, grid_size) {
     let was_visited = false;
     let was_backtracked = false;
