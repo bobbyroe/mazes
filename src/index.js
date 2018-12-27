@@ -9,18 +9,12 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 document.body.appendChild(canvas);
 
-let ctx = canvas.getContext("2d");
-
 const eventsBus = createEventsManager();
 const maze = createMaze({ 
     canvas,
     eventsBus
 });
-// move drawing point to proper pos
-ctx.moveTo(
-    maze.x,
-    maze.y
-);
+
 const UI = createUIManager(eventsBus);
 const searcher = createDFS({maze, eventsBus});
 const solver = createBFS({maze, eventsBus});

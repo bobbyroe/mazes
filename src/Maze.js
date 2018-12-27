@@ -6,7 +6,6 @@ const width = 600;
 const height = 600;
 const cell_size = 60;
 
-
 function _createCells(cell_size, width) {
     let grid_size = Math.floor(width / cell_size);
     const cells = [];
@@ -58,6 +57,8 @@ function createMaze (config_obj) {
     }
 
     function initialize () {
+        // move drawing point to proper pos
+        ctx.moveTo( x, y );
         draw();
         eventsBus.dispatch("MAZE_INITIALIZED");
     }
@@ -85,10 +86,6 @@ function createMaze (config_obj) {
         clear,
         draw,
         initialize,
-        width,
-        height,
-        x,
-        y,
         cells,
         has_unvisited_cells,
         getRandomNeighborFor: manager.getRandomNeighborFor,
