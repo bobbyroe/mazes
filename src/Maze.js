@@ -32,11 +32,6 @@ function createMaze (config_obj) {
     const y = middle.y - height * 0.5;
     const cells = _createCells(cell_size, width);
     const manager = createMazeManager(cells);
-    
-    // set wall thinkness
-    // TODO: move to cell?
-    ctx.lineWidth = 4;
-    ctx.strokeStyle = "#00CCFF";
 
     function draw () {
         ctx.clearRect(x, y, width, height);

@@ -22,6 +22,9 @@ function createCell(row, col, size, grid_size) {
         let cell_x = maze_x + (col * size);
         let cell_y = maze_y + (row * size);
 
+        // set wall thinkness
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = "#00CCFF";
         // fill style
         ctx.fillStyle = "#000000";
         if (was_visited === true) {
