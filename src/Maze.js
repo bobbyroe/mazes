@@ -45,10 +45,10 @@ function createMaze (config_obj) {
             row.forEach((cell) => {
                 // fill style
                 ctx.fillStyle = "#000000";
-                if (cell.was_visited === true) {
+                if (cell.checkIfVisited() === true) {
                     ctx.fillStyle = "#202020";    
                 } 
-                if (cell.was_backtracked === true) {
+                if (cell.checkIfBacktracked() === true) {
                     ctx.fillStyle = "#202040";
                 }
                 cell.draw({ x, y }, ctx);
@@ -63,23 +63,40 @@ function createMaze (config_obj) {
         eventsBus.dispatch("MAZE_INITIALIZED");
     }
 
+    // clears cells for path finding only
+    function clear() {
+        cells.forEach((row) => {
+            row.forEach((c) => {
+                c.clear();
+            });
+        });
+        draw();
+    }
+
     function has_unvisited_cells () {
         return cells.some((row) => { 
             return row.some((cell) => { 
-                return cell.was_visited === false; 
+                return cell.checkIfVisited() === false; 
             }); 
         });
     }
 
-    // clears cells for path finding only
-    function clear () {
-        cells.forEach( (row) => {
-            row.forEach( (c) => {
-                c.was_visited = false;
-                c.was_backtracked = false;
-            });
-        });
-        draw();
+    // cell management
+    function markAsVisited (cell) {
+        cell.markAsVisited();
+    }
+
+    function markAsBacktracked (cell) {
+        cell.markAsBacktracked();
+    }
+
+    function setPreviousCell (obj) {
+        const {for: cur_cell, with: other_cell} = obj;
+        cur_cell.setPreviousCell(other_cell);
+    }
+
+    function getPreviousCell (cell) {
+        return cell.getPreviousCell();
     }
 
     return {
@@ -90,7 +107,11 @@ function createMaze (config_obj) {
         has_unvisited_cells,
         getRandomNeighborFor: manager.getRandomNeighborFor,
         getAdjacentsFor: manager.getAdjacentsFor,
-        removeWalls: manager.removeWalls
+        removeWalls: manager.removeWalls,
+        markAsVisited,
+        markAsBacktracked,
+        setPreviousCell,
+        getPreviousCell
     };
 }
 

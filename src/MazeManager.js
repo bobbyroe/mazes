@@ -9,7 +9,7 @@ function createMazeManager (cells) {
         const neighbs = [];
 
         function checkCell(cur_cell) {
-            if (cur_cell != null && cur_cell.was_visited === false) {
+            if (cur_cell != null && cur_cell.checkIfVisited() === false) {
                 neighbs.push(cur_cell);
             }
         }
@@ -61,7 +61,7 @@ function createMazeManager (cells) {
         }
 
         function checkCell(cur_cell) {
-            if (cur_cell != null && cur_cell.was_visited === false && cur_cell !== cell) {
+            if (cur_cell != null && cur_cell.checkIfVisited() === false && cur_cell !== cell) {
                 if (hasWallsBetween(cell, cur_cell) === false) {
                     neighbs.push(cur_cell);
                 }

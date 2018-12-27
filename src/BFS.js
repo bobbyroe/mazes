@@ -14,11 +14,13 @@ function createBFS (app) {
         
         while (adjacent_cells.length > 0) {
             a_cell = adjacent_cells.pop();
-            a_cell.was_visited = true;
-            a_cell.previous_cell = active_cell;
+            maze.markAsVisited(a_cell);
+            maze.setPreviousCell({ 
+                for: a_cell, 
+                with: active_cell
+            });
 
             if (a_cell.is_exit_cell === true) {
-                console.log("found the exit! begin backtracking.");
                 was_exit_found = true;
                 break;
             } else {
@@ -43,7 +45,7 @@ function createBFS (app) {
         const path_cells = [];
         while (next_cell != null) {
             path_cells.push(next_cell);
-            next_cell = next_cell.previous_cell;
+            next_cell = maze.getPreviousCell(next_cell);
         } 
         path_cells.reverse();
         
@@ -51,9 +53,10 @@ function createBFS (app) {
             let dir = "E";
             let row_diff;
             let col_diff;
-            if (cell.previous_cell != null) {
-                row_diff = cell.row - cell.previous_cell.row;
-                col_diff = cell.col - cell.previous_cell.col;
+            const prev_cell = maze.getPreviousCell(cell);
+            if (prev_cell != null) {
+                row_diff = cell.row - prev_cell.row;
+                col_diff = cell.col - prev_cell.col;
                 if (row_diff === -1) {
                     dir = "N"
                 }
@@ -89,7 +92,7 @@ function createBFS (app) {
     function start() {
         maze.clear();
         let start_cell = maze.cells[0][0];
-        start_cell.was_visited = true;
+        maze.markAsVisited(start_cell);
 
         recursive_search(start_cell);
     }

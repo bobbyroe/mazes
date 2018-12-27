@@ -147,6 +147,34 @@ function createCell(row, col, size, grid_size) {
         }
     }
 
+    function clear () {
+        was_visited = false;
+        was_backtracked = false;
+    }
+
+    function markAsVisited () {
+        was_visited = true;
+    }
+
+    function checkIfVisited () {
+        return was_visited;
+    }
+
+    function markAsBacktracked() {
+        was_backtracked = true;
+    }
+
+    function checkIfBacktracked() {
+        return was_backtracked;
+    }
+
+    function setPreviousCell (cell) {
+        previous_cell = cell;
+    }
+    function getPreviousCell () {
+        return previous_cell;
+    }
+
     function removeWall (on_side) {
         walls[on_side] = false;
     }
@@ -160,14 +188,18 @@ function createCell(row, col, size, grid_size) {
         row,
         col,
         size,
-        was_visited,
-        was_backtracked,
-        previous_cell,
         is_exit_cell,
         walls,
         draw,
         markForShortestPathWithDirection,
-        removeWall
+        removeWall,
+        clear,
+        markAsVisited,
+        checkIfVisited,
+        markAsBacktracked,
+        checkIfBacktracked,
+        setPreviousCell,
+        getPreviousCell
     }
 }
 

@@ -7,7 +7,7 @@ function createDFS (app) {
     let delay = max_delay * 0.5;
     let DFS_was_completed = false;
     function recursive_backtracker(current_cell) {
-        current_cell.was_visited = true;
+        maze.markAsVisited(current_cell);
         if (maze.has_unvisited_cells() === true) {
             let next_cell = maze.getRandomNeighborFor(current_cell);
 
@@ -19,7 +19,7 @@ function createDFS (app) {
 
             } else if (my_stack.length > 0) {
                 next_cell = my_stack.pop();
-                next_cell.was_backtracked = true;
+                maze.markAsBacktracked(next_cell);
                 delay = max_delay * 0.1;
             }
             maze.draw();
