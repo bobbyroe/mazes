@@ -1,4 +1,4 @@
-
+import getStylus from "./CellStylus.js";
 // constructor
 function createCell(row, col, size, grid_size) {
     let was_visited = false;
@@ -14,6 +14,7 @@ function createCell(row, col, size, grid_size) {
     };
     let is_on_shortest_path = false;
     let arrow_direction = "";
+    const stylus = getStylus();
     
     function draw (maze_pos, ctx) {
 
@@ -30,129 +31,23 @@ function createCell(row, col, size, grid_size) {
             ctx.fillStyle = "#202040";
         }
 
-        ctx.beginPath();
-        ctx.rect(
+        stylus.drawCell({
+            walls,
             cell_x,
             cell_y,
             size,
-            size
-        );
-        ctx.fill();
+            ctx
+        });
 
-        // stroke
-        if (walls.N === true) {
-            ctx.beginPath();
-            ctx.moveTo(
-                cell_x,
-                cell_y
-            );
-            ctx.lineTo(
-                cell_x + size,
-                cell_y
-            );
-            ctx.stroke();
-        }
-        if (walls.W === true) {
-            ctx.beginPath();
-            ctx.moveTo(
-                cell_x,
-                cell_y
-            );
-            ctx.lineTo(
-                cell_x,
-                cell_y + size
-            );
-            ctx.stroke();
-        }
-        if (walls.E === true) {
-            ctx.beginPath();
-            ctx.moveTo(
-                cell_x + size,
-                cell_y + size
-            );
-            ctx.lineTo(
-                cell_x + size,
-                cell_y
-            );
-            ctx.stroke();
-        }
-        if (walls.S === true) {
-            ctx.beginPath();
-            ctx.moveTo(
-                cell_x + size,
-                cell_y + size
-            );
-            ctx.lineTo(
-                cell_x,
-                cell_y + size
-            );
-            ctx.stroke();
-        }
         // draw direction arrow
         if (is_on_shortest_path === true) {
-            ctx.fillStyle = "#FF9900";
-            ctx.beginPath();
-            _drawArrow(cell_x, cell_y, ctx);
-            ctx.fill();
-        }
-    }
-
-    function _drawArrow(cell_x, cell_y, ctx) {
-        if (arrow_direction === "N") {
-            ctx.moveTo(
-                cell_x + size * 0.5,
-                cell_y + size * 0.5
-            );
-            ctx.lineTo(
-                cell_x + size * 0.6,
-                cell_y + size * 0.85
-            );
-            ctx.lineTo(
-                cell_x + size * 0.4,
-                cell_y + size * 0.85
-            );
-        }
-        if (arrow_direction === "E") {
-            ctx.moveTo(
-                cell_x + size * 0.5,
-                cell_y + size * 0.5
-            );
-            ctx.lineTo(
-                cell_x + size * 0.15,
-                cell_y + size * 0.6
-            );
-            ctx.lineTo(
-                cell_x + size * 0.15,
-                cell_y + size * 0.4
-            );
-        }
-        if (arrow_direction === "S") {
-            ctx.moveTo(
-                cell_x + size * 0.5,
-                cell_y + size * 0.5
-            );
-            ctx.lineTo(
-                cell_x + size * 0.4,
-                cell_y + size * 0.15
-            );
-            ctx.lineTo(
-                cell_x + size * 0.6,
-                cell_y + size * 0.15
-            );
-        }
-        if (arrow_direction === "W") {
-            ctx.moveTo(
-                cell_x + size * 0.5,
-                cell_y + size * 0.5
-            );
-            ctx.lineTo(
-                cell_x + size * 0.85,
-                cell_y + size * 0.4
-            );
-            ctx.lineTo(
-                cell_x + size * 0.85,
-                cell_y + size * 0.6
-            );
+            stylus.drawArrow({
+                arrow_direction,
+                cell_x,
+                cell_y,
+                size,
+                ctx
+            });
         }
     }
 
