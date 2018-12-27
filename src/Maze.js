@@ -43,14 +43,6 @@ function createMaze (config_obj) {
         cells.forEach((row) => {
 
             row.forEach((cell) => {
-                // fill style
-                ctx.fillStyle = "#000000";
-                if (cell.checkIfVisited() === true) {
-                    ctx.fillStyle = "#202020";    
-                } 
-                if (cell.checkIfBacktracked() === true) {
-                    ctx.fillStyle = "#202040";
-                }
                 cell.draw({ x, y }, ctx);
             });
         });
@@ -99,6 +91,10 @@ function createMaze (config_obj) {
         return cell.getPreviousCell();
     }
 
+    function getStartCell () {
+        return cells[0][0];
+    }
+
     return {
         clear,
         draw,
@@ -111,7 +107,9 @@ function createMaze (config_obj) {
         markAsVisited,
         markAsBacktracked,
         setPreviousCell,
-        getPreviousCell
+        getPreviousCell,
+        getPathDirectionFor: manager.getPathDirectionFor,
+        getStartCell
     };
 }
 

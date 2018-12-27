@@ -100,10 +100,35 @@ function createMazeManager (cells) {
         cur_cell.removeWall(on_side_current);
     }
 
+    function getPathDirectionFor(cell) {
+        let dir = "E";
+        let row_diff;
+        let col_diff;
+        const prev_cell = cell.getPreviousCell();
+        if (prev_cell != null) {
+            row_diff = cell.row - prev_cell.row;
+            col_diff = cell.col - prev_cell.col;
+            if (row_diff === -1) {
+                dir = "N"
+            }
+            if (row_diff === 1) {
+                dir = "S"
+            }
+            if (col_diff === -1) {
+                dir = "W"
+            }
+            if (col_diff === 1) {
+                dir = "E"
+            }
+        }
+        return dir;
+    }
+
     return {
         getRandomNeighborFor,
         getAdjacentsFor,
-        removeWalls
+        removeWalls,
+        getPathDirectionFor
     };
 }
 

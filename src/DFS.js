@@ -45,7 +45,7 @@ function createDFS (app) {
     }
 
     function start() {
-        recursive_backtracker(maze.cells[0][0]);
+        recursive_backtracker(maze.getStartCell());
     }
 
     eventsBus.listenTo("MAZE_INITIALIZED", handleMazeInit);

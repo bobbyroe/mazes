@@ -49,34 +49,10 @@ function createBFS (app) {
         } 
         path_cells.reverse();
         
-        function getPathDirection (cell) {
-            let dir = "E";
-            let row_diff;
-            let col_diff;
-            const prev_cell = maze.getPreviousCell(cell);
-            if (prev_cell != null) {
-                row_diff = cell.row - prev_cell.row;
-                col_diff = cell.col - prev_cell.col;
-                if (row_diff === -1) {
-                    dir = "N"
-                }
-                if (row_diff === 1) {
-                    dir = "S"
-                }
-                if (col_diff === -1) {
-                    dir = "W"
-                }
-                if (col_diff === 1) {
-                    dir = "E"
-                }
-            }
-            return dir;
-        }
-
         // recursively draw solution
         let inc = 0;
         function recursive_pathback (cell) {
-            let dir = getPathDirection(cell);
+            let dir = maze.getPathDirectionFor(cell);
             cell.markForShortestPathWithDirection(true, dir);
             maze.draw();
             inc += 1;
@@ -91,9 +67,8 @@ function createBFS (app) {
 
     function start() {
         maze.clear();
-        let start_cell = maze.cells[0][0];
+        let start_cell = maze.getStartCell();
         maze.markAsVisited(start_cell);
-
         recursive_search(start_cell);
     }
 

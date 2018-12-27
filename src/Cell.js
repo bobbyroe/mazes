@@ -21,6 +21,15 @@ function createCell(row, col, size, grid_size) {
         let cell_x = maze_x + (col * size);
         let cell_y = maze_y + (row * size);
 
+        // fill style
+        ctx.fillStyle = "#000000";
+        if (was_visited === true) {
+            ctx.fillStyle = "#202020";
+        }
+        if (was_backtracked === true) {
+            ctx.fillStyle = "#202040";
+        }
+
         ctx.beginPath();
         ctx.rect(
             cell_x,
