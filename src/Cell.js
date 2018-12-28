@@ -94,7 +94,6 @@ function createCell(row, col, size, grid_size) {
     return {
         row,
         col,
-        size,
         is_exit_cell,
         walls,
         draw,

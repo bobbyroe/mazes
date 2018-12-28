@@ -4,7 +4,7 @@ import createMazeManager from "./MazeManager.js";
 // private
 const width = 600;
 const height = 600;
-const cell_size = 60;
+const cell_size = 15;
 
 function _createCells(cell_size, width) {
     let grid_size = Math.floor(width / cell_size);
